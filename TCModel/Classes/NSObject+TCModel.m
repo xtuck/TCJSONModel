@@ -10,6 +10,7 @@
 #import <objc/runtime.h>
 #import "TCModelClassProperty.h"
 #import "TCJSONValueTransformer.h"
+#import <UIKit/UIResponder.h>
 
 #pragma mark - associated objects names
 static const char * kTCMapperObjectKey;
@@ -352,6 +353,11 @@ static TCJSONValueTransformer* tcValueTransformer = nil;
                         if (![jsonValue isEqual:[self valueForKey:property.name]])
                             [self setValue:jsonValue forKey:property.name];
                     } else {
+                        if (!property.isTCRequired) {
+                            //存在了不支持的属性类型，但是忽略了
+                            TCLog(@"%@ type not supported for %@.%@", property.type, [self class], property.name);
+                            continue;
+                        }
                         if (err) {
                             NSString* msg = [NSString stringWithFormat:@"%@ type not supported for %@.%@", property.type, [self class], property.name];
                             TCModelError* dataErr = [TCModelError errorInvalidDataWithTypeMismatch:msg];
@@ -383,20 +389,30 @@ static TCJSONValueTransformer* tcValueTransformer = nil;
     if ([tcAllowedJSONTypes containsObject:class]) {
         return NO;
     }
-    if ([class isSubclassOfClass:NSClassFromString(@"UIResponder")]) {
+    if ([class isSubclassOfClass:NSDate.class]) {
+        return NO;
+    }
+    if ([class isSubclassOfClass:NSValue.class]) {
+        return NO;
+    }
+    if (class == NSObject.class) {
+        return NO;
+    }
+    if ([class isSubclassOfClass:UIResponder.class]) {
         //UI和VC，不要用来作为model的属性，如有必要请加<TCIgnore>进行修饰
         return NO;
     }
-    NSBundle *bundle = [NSBundle bundleForClass:class];
-    if (!bundle.bundleIdentifier) {
-        //NSObject等其他类，在“usr/include”中，没有bundleId
-        return NO;;
-    }
-    NSRange rang = [bundle.bundlePath rangeOfString:@"/System/Library/"];
-    //系统的类都在/RuntimeRoot/System/Library/中
-    if (rang.location != NSNotFound) {
-        return NO;
-    }
+//    NSBundle *bundle = [NSBundle bundleForClass:class];
+//    if (!bundle.bundleIdentifier) {
+//        //NSObject等其他类，在“usr/include”中，没有bundleId
+//        return NO;;
+//    }
+//    //rangeOfString相对来说比较耗时，所以注释掉了
+//    NSRange rang = [bundle.bundlePath rangeOfString:@"/System/Library/" options:NSBackwardsSearch];
+//    //系统的类都在/RuntimeRoot/System/Library/中
+//    if (rang.location != NSNotFound) {
+//        return NO;
+//    }
     return [class isSubclassOfClass:NSObject.class];
 }
 
