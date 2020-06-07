@@ -1,0 +1,22 @@
+{
+  "name": "TCModel",
+  "version": "0.1.0",
+  "summary": "A short description of TCModel.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/xtuck/TCModel",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "xtuck": "104166631@qq.com"
+  },
+  "source": {
+    "git": "https://github.com/xtuck/TCModel.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "TCModel/Classes/**/*"
+}

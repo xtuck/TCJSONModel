@@ -23,6 +23,11 @@
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
+		96432B4F248D079F00D31E1B /* MJBag.m in Sources */ = {isa = PBXBuildFile; fileRef = 96432B4D248D079F00D31E1B /* MJBag.m */; };
+		96432B52248D07A600D31E1B /* MJStudent.m in Sources */ = {isa = PBXBuildFile; fileRef = 96432B51248D07A600D31E1B /* MJStudent.m */; };
+		96432B54248D0F9F00D31E1B /* weibo.json in Resources */ = {isa = PBXBuildFile; fileRef = 96432B53248D0F9F00D31E1B /* weibo.json */; };
+		96432B57248D0FDD00D31E1B /* JSWeiboModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 96432B55248D0FDD00D31E1B /* JSWeiboModel.m */; };
+		96432B5A248D107500D31E1B /* DateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 96432B59248D107500D31E1B /* DateFormatter.m */; };
 		E6E8A30ABF86FB09366CEE53 /* Pods_TCModel_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D27AC8517B1F3C390B8009C /* Pods_TCModel_Example.framework */; };
 /* End PBXBuildFile section */
 
@@ -59,14 +64,23 @@
 		6003F5B9195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
-		6CDCE29000DA67C8C6576404 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		6CDCE29000DA67C8C6576404 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		71719F9E1E33DC2100824A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8B1F7893A2B194AF82B22D84 /* Pods-TCModel_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TCModel_Tests.debug.xcconfig"; path = "Target Support Files/Pods-TCModel_Tests/Pods-TCModel_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		9030E6B319A83A7026F34CD9 /* Pods-TCModel_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TCModel_Tests.release.xcconfig"; path = "Target Support Files/Pods-TCModel_Tests/Pods-TCModel_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		95041411ED1AC9C913C5714E /* Pods_TCModel_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TCModel_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C025EAC265903D815A153244 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		C7D2FD3F8BF7CCD4F5D126A4 /* TCModel.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = TCModel.podspec; path = ../TCModel.podspec; sourceTree = "<group>"; };
+		96432B4D248D079F00D31E1B /* MJBag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJBag.m; sourceTree = "<group>"; };
+		96432B4E248D079F00D31E1B /* MJBag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJBag.h; sourceTree = "<group>"; };
+		96432B50248D07A600D31E1B /* MJStudent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJStudent.h; sourceTree = "<group>"; };
+		96432B51248D07A600D31E1B /* MJStudent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJStudent.m; sourceTree = "<group>"; };
+		96432B53248D0F9F00D31E1B /* weibo.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = weibo.json; sourceTree = "<group>"; };
+		96432B55248D0FDD00D31E1B /* JSWeiboModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSWeiboModel.m; sourceTree = "<group>"; };
+		96432B56248D0FDD00D31E1B /* JSWeiboModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSWeiboModel.h; sourceTree = "<group>"; };
+		96432B58248D107500D31E1B /* DateFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateFormatter.h; sourceTree = "<group>"; };
+		96432B59248D107500D31E1B /* DateFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateFormatter.m; sourceTree = "<group>"; };
+		C025EAC265903D815A153244 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		C7D2FD3F8BF7CCD4F5D126A4 /* TCModel.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = TCModel.podspec; path = ../TCModel.podspec; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,7 +117,6 @@
 				8B1F7893A2B194AF82B22D84 /* Pods-TCModel_Tests.debug.xcconfig */,
 				9030E6B319A83A7026F34CD9 /* Pods-TCModel_Tests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -171,6 +184,7 @@
 		6003F5B5195388D20070C39A /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				96432B4C248D078B00D31E1B /* TestModel */,
 				6003F5BB195388D20070C39A /* Tests.m */,
 				6003F5B6195388D20070C39A /* Supporting Files */,
 			);
@@ -195,6 +209,22 @@
 				C025EAC265903D815A153244 /* LICENSE */,
 			);
 			name = "Podspec Metadata";
+			sourceTree = "<group>";
+		};
+		96432B4C248D078B00D31E1B /* TestModel */ = {
+			isa = PBXGroup;
+			children = (
+				96432B4E248D079F00D31E1B /* MJBag.h */,
+				96432B4D248D079F00D31E1B /* MJBag.m */,
+				96432B50248D07A600D31E1B /* MJStudent.h */,
+				96432B51248D07A600D31E1B /* MJStudent.m */,
+				96432B56248D0FDD00D31E1B /* JSWeiboModel.h */,
+				96432B55248D0FDD00D31E1B /* JSWeiboModel.m */,
+				96432B58248D107500D31E1B /* DateFormatter.h */,
+				96432B59248D107500D31E1B /* DateFormatter.m */,
+				96432B53248D0F9F00D31E1B /* weibo.json */,
+			);
+			name = TestModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,6 +288,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -280,6 +311,7 @@
 				873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */,
 				71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
+				96432B54248D0F9F00D31E1B /* weibo.json in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -364,9 +396,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96432B5A248D107500D31E1B /* DateFormatter.m in Sources */,
 				6003F59E195388D20070C39A /* TCAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* TCViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
+				96432B57248D0FDD00D31E1B /* JSWeiboModel.m in Sources */,
+				96432B4F248D079F00D31E1B /* MJBag.m in Sources */,
+				96432B52248D07A600D31E1B /* MJStudent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

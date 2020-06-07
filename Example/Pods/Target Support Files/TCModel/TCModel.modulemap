@@ -1,0 +1,6 @@
+framework module TCModel {
+  umbrella header "TCModel-umbrella.h"
+
+  export *
+  module * { export * }
+}
