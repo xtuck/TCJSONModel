@@ -395,6 +395,12 @@ static TCJSONValueTransformer* tcValueTransformer = nil;
     if ([class isSubclassOfClass:NSValue.class]) {
         return NO;
     }
+    if ([class isSubclassOfClass:NSURL.class]) {
+        return NO;
+    }
+    if ([class isSubclassOfClass:NSSet.class]) {
+        return NO;
+    }
     if (class == NSObject.class) {
         return NO;
     }
