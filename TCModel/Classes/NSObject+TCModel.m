@@ -1137,7 +1137,7 @@ static TCJSONValueTransformer* tcValueTransformer = nil;
 }
 
 
-- (instancetype)copyJM:(NSError **)error {
+- (instancetype)tc_copy:(NSError **)error {
     return [[self.class alloc] initWithDictionaryTC:self.tc_toDictionary error:error];
 }
 

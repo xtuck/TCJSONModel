@@ -74,7 +74,7 @@ lastPathComponent], __LINE__, [NSString stringWithFormat:(s), ##__VA_ARGS__] )
 
 /// 伪copy，返回一个一模一样实例对象
 /// @param error 接收错误信息
-- (instancetype)copyJM:(NSError **)error;
+- (instancetype)tc_copy:(NSError **)error;
 
 
 #pragma mark --提高解析效率

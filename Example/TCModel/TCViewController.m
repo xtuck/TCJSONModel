@@ -35,7 +35,7 @@
         printf("\nmodel --> json :            %8.2f   ", (end - begin) * 1000);
 
         begin = CACurrentMediaTime();
-        JSWeiboStatus *md2 = [md copyJM:nil];
+        JSWeiboStatus *md2 = [md tc_copy:nil];
         end = CACurrentMediaTime();
         printf("\nmodel copy mode :            %8.2f   ", (end - begin) * 1000);
     });
