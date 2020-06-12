@@ -27,8 +27,7 @@ static TCJSONValueTransformer* tcValueTransformer = nil;
 
 #pragma mark - initialization methods
 
-+(void)load
-{
++(void)load {
     static dispatch_once_t once;
     dispatch_once(&once, ^{
         // initialize all class static objects,
@@ -53,83 +52,53 @@ static TCJSONValueTransformer* tcValueTransformer = nil;
     });
 }
 
--(void)__tcSetup__
-{
+-(void)__tcSetup__ {
     //if first instance of this model, generate the property list
     if (!objc_getAssociatedObject(self.class, &kTCClassPropertiesKey)) {
         [self __tcInspectProperties];
     }
 
     //if there's a custom key mapper, store it in the associated object
-    id mapper = [[self class] tc_keyMapper];
-    if ( mapper && !objc_getAssociatedObject(self.class, &kTCMapperObjectKey) ) {
-        objc_setAssociatedObject(self.class,&kTCMapperObjectKey,mapper,OBJC_ASSOCIATION_RETAIN);
+    if (!objc_getAssociatedObject(self.class, &kTCMapperObjectKey)) {
+        id mapper = [self.class tc_keyMapper];
+        if (mapper) {
+            objc_setAssociatedObject(self.class,&kTCMapperObjectKey,mapper,OBJC_ASSOCIATION_RETAIN);
+        }
     }
 }
 
--(instancetype)initWithDataTC:(NSData *)data error:(NSError *__autoreleasing *)err
-{
++ (instancetype)tc_modelFromKeyValues:(id)keyValues error:(NSError **)err {
     //check for nil input
-    if (!data) {
+    if (!keyValues) {
         if (err) *err = [TCModelError errorInputIsNil];
         return nil;
     }
-    //read the json
-    TCModelError* initError = nil;
-    id obj = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&initError];
-    if (initError) {
+    NSDictionary *dic = nil;
+    if ([keyValues isKindOfClass:NSDictionary.class]) {
+        dic = keyValues;
+    } else {
+        NSData *data = nil;
+        if ([keyValues isKindOfClass:NSData.class]) {
+            data = keyValues;
+        } else if ([keyValues isKindOfClass:NSString.class]) {
+            data = [((NSString *)keyValues) dataUsingEncoding:NSUTF8StringEncoding];
+        }
+        if (data) {
+            dic = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+        }
+    }
+    if (!dic) {
         if (err) *err = [TCModelError errorBadJSON];
         return nil;
     }
-
-    //init with dictionary
-    id objModel = [self initWithDictionaryTC:obj error:&initError];
-    if (initError && err) *err = initError;
-    return objModel;
+    return [[self.class alloc] initWithDictionaryTC:dic error:err];
 }
 
--(id)initWithStringTC:(NSString*)string error:(TCModelError**)err
-{
-    TCModelError* initError = nil;
-    id objModel = [self initWithStringTC:string usingEncoding:NSUTF8StringEncoding error:&initError];
-    if (initError && err) *err = initError;
-    return objModel;
-}
-
--(id)initWithStringTC:(NSString *)string usingEncoding:(NSStringEncoding)encoding error:(TCModelError**)err
-{
-    //check for nil input
-    if (!string) {
-        if (err) *err = [TCModelError errorInputIsNil];
-        return nil;
-    }
-
-    TCModelError* initError = nil;
-    id objModel = [self initWithDataTC:[string dataUsingEncoding:encoding] error:&initError];
-    if (initError && err) *err = initError;
-    return objModel;
-
-}
-
--(id)initWithDictionaryTC:(NSDictionary*)dict error:(NSError**)err
-{
-    //check for nil input
-    if (!dict) {
-        if (err) *err = [TCModelError errorInputIsNil];
-        return nil;
-    }
-
-    //invalid input, just create empty instance
-    if (![dict isKindOfClass:[NSDictionary class]]) {
-        if (err) *err = [TCModelError errorInvalidDataWithMessage:@"Attempt to initialize JSONModel object using initWithDictionary:error: but the dictionary parameter was not an 'NSDictionary'."];
-        return nil;
-    }
-
+-(id)initWithDictionaryTC:(NSDictionary*)dict error:(NSError**)err {
     //create a class instance
     self = [self init];
     
     if (!self) {
-
         //super init didn't succeed
         if (err) *err = [TCModelError errorModelIsInvalid];
         return nil;
@@ -138,7 +107,7 @@ static TCJSONValueTransformer* tcValueTransformer = nil;
     [self __tcSetup__];
 
     //import the data from a dictionary
-    if (![self __tcImportDictionary:dict withKeyMapper:self.__tcKeyMapper validation:YES error:err]) {
+    if (![self __tcImportDictionary:dict validation:YES error:err]) {
         return nil;
     }
 
@@ -146,34 +115,27 @@ static TCJSONValueTransformer* tcValueTransformer = nil;
     return self;
 }
 
--(TCJSONKeyMapper*)__tcKeyMapper
-{
+-(TCJSONKeyMapper*)__tcKeyMapper {
     //get the model key mapper
     return objc_getAssociatedObject(self.class, &kTCMapperObjectKey);
 }
 
--(NSString*)__tcMapString:(NSString*)string withKeyMapper:(TCJSONKeyMapper*)keyMapper {
-    if (keyMapper) {
-        string = [keyMapper convertValue:string];
-    }
-    return string;
-}
+-(BOOL)__tcImportDictionary:(NSDictionary*)dict validation:(BOOL)validation error:(NSError**)err {
+    TCJSONKeyMapper *keyMapper = self.__tcKeyMapper;
+    NSArray* properties = [self __tcProperties__];
 
--(BOOL)__tcImportDictionary:(NSDictionary*)dict withKeyMapper:(TCJSONKeyMapper*)keyMapper validation:(BOOL)validation error:(NSError**)err
-{
     //loop over the incoming keys and set self's properties
-    for (TCModelClassProperty* property in [self __tcProperties__]) {
+    for (TCModelClassProperty* property in properties) {
 
         //convert key name to model keys, if a mapper is provided
-        NSString* jsonKeyPath = keyMapper ? [self __tcMapString:property.name withKeyMapper:keyMapper] : property.name;
+        NSString* jsonKeyPath = keyMapper ? [keyMapper convertValue:property.name] : property.name;
         //JMLog(@"keyPath: %@", jsonKeyPath);
 
         //general check for data type compliance
         id jsonValue;
         @try {
             jsonValue = [dict valueForKeyPath: jsonKeyPath];
-        }
-        @catch (NSException *exception) {
+        } @catch (NSException *exception) {
             jsonValue = dict[jsonKeyPath];
         }
 
@@ -193,7 +155,6 @@ static TCJSONValueTransformer* tcValueTransformer = nil;
 
         Class jsonValueClass = [jsonValue class];
         BOOL isValueOfAllowedType = NO;
-
         for (Class allowedType in tcAllowedJSONTypes) {
             if ( [jsonValueClass isSubclassOfClass: allowedType] ) {
                 isValueOfAllowedType = YES;
@@ -254,7 +215,7 @@ static TCJSONValueTransformer* tcValueTransformer = nil;
                     //这种情况是将字典合并到model中
                     [(NSObject *)value tc_mergeFromDictionary:jsonValue error:&initErr];
                 } else {
-                    value = [[property.type alloc] initWithDictionaryTC: jsonValue error:&initErr];
+                    value = [[property.type alloc] initWithDictionaryTC:jsonValue error:&initErr];
                 }
 
                 if (!value) {
@@ -439,10 +400,7 @@ static TCJSONValueTransformer* tcValueTransformer = nil;
 }
 
 //inspects the class, get's a list of the class properties
--(void)__tcInspectProperties
-{
-    //JMLog(@"Inspect class: %@", [self class]);
-
+-(void)__tcInspectProperties {
     NSMutableDictionary* propertyIndex = [NSMutableDictionary dictionary];
 
     //temp variables for the loops
@@ -832,7 +790,7 @@ static TCJSONValueTransformer* tcValueTransformer = nil;
             continue;
 
         //fetch key and value
-        NSString* keyPath = self.__tcKeyMapper ? [self __tcMapString:p.name withKeyMapper:self.__tcKeyMapper] : p.name;
+        NSString* keyPath = self.__tcKeyMapper ? [self.__tcKeyMapper convertValue:p.name] : p.name;
         value = [self valueForKey: p.name];
 
         //JMLog(@"toDictionary[%@]->[%@] = '%@'", p.name, keyPath, value);
@@ -1133,7 +1091,7 @@ static TCJSONValueTransformer* tcValueTransformer = nil;
 
 - (BOOL)tc_mergeFromDictionary:(NSDictionary *)dict error:(NSError **)error
 {
-    return [self __tcImportDictionary:dict withKeyMapper:self.__tcKeyMapper validation:NO error:error];
+    return [self __tcImportDictionary:dict validation:NO error:error];
 }
 
 

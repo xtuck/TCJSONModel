@@ -27,10 +27,11 @@ lastPathComponent], __LINE__, [NSString stringWithFormat:(s), ##__VA_ARGS__] )
 
 @interface NSObject (TCModel)<TCIgnore,TCRequired>
 
-- (instancetype)initWithDictionaryTC:(NSDictionary *)dict error:(NSError **)err;
-- (instancetype)initWithDataTC:(NSData *)data error:(NSError **)error;
-- (instancetype)initWithStringTC:(NSString *)string error:(TCModelError **)err;
-- (instancetype)initWithStringTC:(NSString *)string usingEncoding:(NSStringEncoding)encoding error:(TCModelError **)err;
+
+/// 类方法转化model
+/// @param keyValues 可以是：NSDictionary，NSData，NSString
+/// @param err 转化过程中的错误信息
++ (instancetype)tc_modelFromKeyValues:(id)keyValues error:(NSError **)err;
 
 - (NSDictionary *)tc_toDictionary;
 - (NSString *)tc_toJSONString;

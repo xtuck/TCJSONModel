@@ -25,7 +25,7 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         NSTimeInterval begin, end;
         begin = CACurrentMediaTime();
-        JSWeiboStatus *md = [[JSWeiboStatus alloc] initWithDictionaryTC:json error:nil];
+        JSWeiboStatus *md = [JSWeiboStatus tc_modelFromKeyValues:json error:nil];
         end = CACurrentMediaTime();
         printf("\nJSON --> model :            %8.2f   ", (end - begin) * 1000);
         
