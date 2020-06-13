@@ -1,7 +1,7 @@
 # Acknowledgements
 This application makes use of the following third party libraries:
 
-## TCModel
+## TCJSONModel
 
 Copyright (c) 2020 xtuck <104166631@qq.com>
 

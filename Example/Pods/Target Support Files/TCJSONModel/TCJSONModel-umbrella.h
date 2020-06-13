@@ -17,6 +17,6 @@
 #import "TCModelClassProperty.h"
 #import "TCModelError.h"
 
-FOUNDATION_EXPORT double TCModelVersionNumber;
-FOUNDATION_EXPORT const unsigned char TCModelVersionString[];
+FOUNDATION_EXPORT double TCJSONModelVersionNumber;
+FOUNDATION_EXPORT const unsigned char TCJSONModelVersionString[];
 
