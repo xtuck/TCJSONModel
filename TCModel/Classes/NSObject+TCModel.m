@@ -179,7 +179,7 @@ static TCJSONValueTransformer* tcValueTransformer = nil;
 
             // check for custom setter, than the model doesn't need to do any guessing
             // how to read the property's value from JSON
-            if (self.isUseCustomGetterOrSetters && [self __tcCustomSetValue:jsonValue forProperty:property]) {
+            if (self.class.tc_supportCustomGetterAndSetters && [self __tcCustomSetValue:jsonValue forProperty:property]) {
                 //skip to next JSON key
                 continue;
             };
@@ -513,7 +513,7 @@ static TCJSONValueTransformer* tcValueTransformer = nil;
             }
 
             // generate custom setters and getter //下面的自定义get和set，基本用不到
-            if (p && self.isUseCustomGetterOrSetters)
+            if (p && self.class.tc_supportCustomGetterAndSetters)
             {
                 NSString *name = [p.name stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:[p.name substringToIndex:1].uppercaseString];
 
@@ -730,7 +730,7 @@ static TCJSONValueTransformer* tcValueTransformer = nil;
     return YES;
 }
 
-- (BOOL)isUseCustomGetterOrSetters {
++ (BOOL)tc_supportCustomGetterAndSetters {
     return NO;
 }
 
@@ -1097,6 +1097,20 @@ static TCJSONValueTransformer* tcValueTransformer = nil;
 
 - (instancetype)tc_copy:(NSError **)error {
     return [[self.class alloc] initWithDictionaryTC:self.tc_toDictionary error:error];
+}
+
+-(instancetype)tc_coder:(NSCoder *)decoder {
+    NSString* json;
+    if ([decoder respondsToSelector:@selector(decodeObjectOfClass:forKey:)]) {
+        json = [decoder decodeObjectOfClass:[NSString class] forKey:@"json"];
+    } else {
+        json = [decoder decodeObjectForKey:@"json"];
+    }
+    return [self.class tc_modelFromKeyValues:json error:nil];;
+}
+
+-(void)tc_encodeCoder:(NSCoder *)encoder {
+    [encoder encodeObject:self.tc_toJSONString forKey:@"json"];
 }
 
 @end

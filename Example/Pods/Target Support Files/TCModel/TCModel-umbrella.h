@@ -13,6 +13,7 @@
 #import "NSObject+TCModel.h"
 #import "TCJSONKeyMapper.h"
 #import "TCJSONValueTransformer.h"
+#import "TCModel.h"
 #import "TCModelClassProperty.h"
 #import "TCModelError.h"
 

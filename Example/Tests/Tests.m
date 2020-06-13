@@ -60,7 +60,7 @@
                            };
     
     // 2.将字典转为MJStudent模型
-    MJStudent *stu = [[MJStudent alloc] initWithDictionaryTC:dict error:nil];
+    MJStudent *stu =[MJStudent tc_modelFromKeyValues:dict error:nil];
     
     // 3.检测MJStudent模型的属性
     XCTAssert([stu.ID isEqual:@"20"]);
@@ -75,7 +75,7 @@
 
 - (void)test {
     NSString *json = @"{\"repoID\":1234,\"name\":\"YYModel\",\"user\":{\"uid\":5678,\"name\":\"ibireme\"}}";
-    YYTestNestRepo *repo = [[YYTestNestRepo alloc] initWithStringTC:json error:nil];
+    YYTestNestRepo *repo = [YYTestNestRepo tc_modelFromKeyValues:json error:nil];
     XCTAssert(repo.repoID == 1234);
     XCTAssert([repo.name isEqualToString:@"YYModel"]);
     XCTAssert(repo.user.uid == 5678);
