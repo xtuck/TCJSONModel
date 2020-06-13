@@ -17,7 +17,7 @@ TCModel is available through [CocoaPods](https://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'TCModel'
+pod 'TCJSONModel'
 ```
 
 ## Author
@@ -27,3 +27,6 @@ xtuck, 104166631@qq.com
 ## License
 
 TCModel is available under the MIT license. See the LICENSE file for more info.
+
+创建库的时候，没有想到与已有的库重名了。pod公有库中存在了另外一个TCModel。我这个库只能用“TCJSONModel”来命名了，
+pod instasll后，我的库中的类名称仍然是TCModel
