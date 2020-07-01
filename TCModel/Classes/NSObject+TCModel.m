@@ -1077,11 +1077,17 @@ static TCJSONValueTransformer* tcValueTransformer = nil;
 
 
 #pragma mark - key mapping
-+(TCJSONKeyMapper*)tc_keyMapper
-{
++(TCJSONKeyMapper*)tc_keyMapper {
+    NSDictionary *dic = [self tc_propertyNameDictionaryKey];
+    if (dic.allKeys.count) {
+        return [[TCJSONKeyMapper alloc] initWithModelToJSONDictionary:dic];
+    }
     return nil;
 }
 
++ (NSDictionary *)tc_propertyNameDictionaryKey {
+    return nil;
+}
 
 #pragma mark - working with incomplete models
 - (void)tc_mergeFromDictionary:(NSDictionary *)dict

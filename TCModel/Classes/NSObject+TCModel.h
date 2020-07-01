@@ -64,6 +64,9 @@ lastPathComponent], __LINE__, [NSString stringWithFormat:(s), ##__VA_ARGS__] )
  */
 + (TCJSONKeyMapper *)tc_keyMapper;
 
+/// 左边是obj对象属性名。右边是字典中的key
++ (NSDictionary *)tc_propertyNameDictionaryKey;
+
 
 /**
  * Merges values from the given dictionary into the model instance.
