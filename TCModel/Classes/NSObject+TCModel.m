@@ -67,6 +67,10 @@ static TCJSONValueTransformer* tcValueTransformer = nil;
     }
 }
 
++ (instancetype)tc_modelFromKeyValues:(id)keyValues {
+    return  [self tc_modelFromKeyValues:keyValues error:nil];
+}
+
 + (instancetype)tc_modelFromKeyValues:(id)keyValues error:(NSError **)err {
     //check for nil input
     if (!keyValues) {
@@ -369,17 +373,19 @@ static TCJSONValueTransformer* tcValueTransformer = nil;
         //UI和VC，不要用来作为model的属性，如有必要请加<TCIgnore>进行修饰
         return NO;
     }
-//    NSBundle *bundle = [NSBundle bundleForClass:class];
-//    if (!bundle.bundleIdentifier) {
-//        //NSObject等其他类，在“usr/include”中，没有bundleId
-//        return NO;;
-//    }
-//    //rangeOfString相对来说比较耗时，所以注释掉了
-//    NSRange rang = [bundle.bundlePath rangeOfString:@"/System/Library/" options:NSBackwardsSearch];
-//    //系统的类都在/RuntimeRoot/System/Library/中
-//    if (rang.location != NSNotFound) {
-//        return NO;
-//    }
+/*
+    NSBundle *bundle = [NSBundle bundleForClass:class];
+    if (!bundle.bundleIdentifier) {
+        //NSObject等其他类，在“usr/include”中，没有bundleId
+        return NO;;
+    }
+    //rangeOfString相对来说比较耗时，所以注释掉了
+    NSRange rang = [bundle.bundlePath rangeOfString:@"/System/Library/" options:NSBackwardsSearch];
+    if (rang.location != NSNotFound) {
+        //系统的类都在/RuntimeRoot/System/Library/中
+        return NO;
+    }
+*/
     return [class isSubclassOfClass:NSObject.class];
 }
 
@@ -917,11 +923,42 @@ static TCJSONValueTransformer* tcValueTransformer = nil;
 
 #pragma mark - import/export of lists
 //loop over an NSArray of JSON objects and turn them into models
-+(NSMutableArray*)tc_arrayOfModelsFromDictionaries:(NSArray*)array
-{
-    return [self tc_arrayOfModelsFromDictionaries:array error:nil];
+
++ (NSMutableArray *)tc_arrayOfModelsFromKeyValues:(id)keyValues {
+    return [self tc_arrayOfModelsFromKeyValues:keyValues error:nil];
 }
 
++ (NSMutableArray *)tc_arrayOfModelsFromKeyValues:(id)keyValues error:(NSError **)err {
+    //check for nil input
+    if (!keyValues) {
+        if (err) *err = [TCModelError errorInputIsNil];
+        return nil;
+    }
+    NSArray *array = nil;
+    if ([keyValues isKindOfClass:NSArray.class]) {
+        array = keyValues;
+    } else {
+        NSData *data = nil;
+        if ([keyValues isKindOfClass:NSData.class]) {
+            data = keyValues;
+        } else if ([keyValues isKindOfClass:NSString.class]) {
+            data = [((NSString *)keyValues) dataUsingEncoding:NSUTF8StringEncoding];
+        }
+        if (data) {
+            id jsonArr = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:err];
+            if ([jsonArr isKindOfClass:NSArray.class]) {
+                array = jsonArr;
+            }
+        }
+    }
+    if (!array) {
+        if (err) *err = [TCModelError errorBadJSON];
+        return nil;
+    }
+    return [self tc_arrayOfModelsFromDictionaries:array error:err];
+}
+
+/*
 + (NSMutableArray *)tc_arrayOfModelsFromData:(NSData *)data error:(NSError **)err
 {
     id json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:err];
@@ -934,6 +971,7 @@ static TCJSONValueTransformer* tcValueTransformer = nil;
 {
     return [self tc_arrayOfModelsFromData:[string dataUsingEncoding:NSUTF8StringEncoding] error:err];
 }
+*/
 
 // Same as above, but with error reporting
 +(NSMutableArray*)tc_arrayOfModelsFromDictionaries:(NSArray*)array error:(NSError**)err
@@ -1100,6 +1138,10 @@ static TCJSONValueTransformer* tcValueTransformer = nil;
     return [self __tcImportDictionary:dict validation:NO error:error];
 }
 
+
+- (instancetype)tc_copy {
+    return [self tc_copy:nil];
+}
 
 - (instancetype)tc_copy:(NSError **)error {
     return [[self.class alloc] initWithDictionaryTC:self.tc_toDictionary error:error];

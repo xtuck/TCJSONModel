@@ -30,8 +30,9 @@ lastPathComponent], __LINE__, [NSString stringWithFormat:(s), ##__VA_ARGS__] )
 
 /// 类方法转化model
 /// @param keyValues 可以是：NSDictionary，NSData，NSString
-/// @param err 转化过程中的错误信息
++ (instancetype)tc_modelFromKeyValues:(id)keyValues;
 + (instancetype)tc_modelFromKeyValues:(id)keyValues error:(NSError **)err;
+
 
 - (NSDictionary *)tc_toDictionary;
 - (NSString *)tc_toJSONString;
@@ -42,10 +43,11 @@ lastPathComponent], __LINE__, [NSString stringWithFormat:(s), ##__VA_ARGS__] )
 - (NSData *)tc_toJSONDataWithKeys:(NSArray <NSString *> *)propertyNames;
 
 
-//字典转成model数组
-+ (NSMutableArray *)tc_arrayOfModelsFromDictionaries:(NSArray *)array error:(NSError **)err;
-+ (NSMutableArray *)tc_arrayOfModelsFromData:(NSData *)data error:(NSError **)err;
-+ (NSMutableArray *)tc_arrayOfModelsFromString:(NSString *)string error:(NSError **)err;
+/// 字典转成model数组
+/// @param keyValues 可以是：NSDictionary，NSData，NSString
++ (NSMutableArray *)tc_arrayOfModelsFromKeyValues:(id)keyValues;
++ (NSMutableArray *)tc_arrayOfModelsFromKeyValues:(id)keyValues error:(NSError **)err;
+
 
 //纯字典转成字典中value为model的字典
 + (NSMutableDictionary *)tc_dictionaryOfModelsFromDictionary:(NSDictionary *)dictionary error:(NSError **)err;
@@ -75,14 +77,14 @@ lastPathComponent], __LINE__, [NSString stringWithFormat:(s), ##__VA_ARGS__] )
 - (BOOL)tc_mergeFromDictionary:(NSDictionary *)dict error:(NSError **)error;
 
 
-
 /// 伪copy，返回一个一模一样实例对象
-/// @param error 接收错误信息
+- (instancetype)tc_copy;
 - (instancetype)tc_copy:(NSError **)error;
 
-///归档
-- (instancetype)tc_coder:(NSCoder *)decoder;
-- (void)tc_encodeCoder:(NSCoder *)encoder;
+
+///归档 .m中已实现
+//- (instancetype)tc_coder:(NSCoder *)decoder;
+//- (void)tc_encodeCoder:(NSCoder *)encoder;
 
 
 #pragma mark --提高解析效率
