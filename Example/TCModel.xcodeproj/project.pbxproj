@@ -80,7 +80,7 @@
 		96432B58248D107500D31E1B /* DateFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateFormatter.h; sourceTree = "<group>"; };
 		96432B59248D107500D31E1B /* DateFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateFormatter.m; sourceTree = "<group>"; };
 		C025EAC265903D815A153244 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		C7D2FD3F8BF7CCD4F5D126A4 /* TCJSONModel.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = TCJSONModel.podspec; path = ../TCJSONModel.podspec; sourceTree = "<group>"; };
+		C7D2FD3F8BF7CCD4F5D126A4 /* TCJSONModel.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = TCJSONModel.podspec; path = ../TCJSONModel.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
