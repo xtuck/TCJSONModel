@@ -18,6 +18,30 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    //TEST
+    NSString *str = @"1232131";
+    NSString *str2 = [str substringToIndex:0];
+    NSString *str3 = [str substringFromIndex:str.length-1];
+    NSString *str4 = [str substringWithRange:NSMakeRange(0, 0)];
+
+    if (str2) {
+        NSLog(@"str2 %@",str2);
+    }
+    if (str3) {
+        NSLog(@"str3 %@",str3);
+    }
+    if (str4) {
+        NSLog(@"str4 %@",str4);
+    }
+
+    
+    NSUInteger start = [str rangeOfString:@"["].location;
+    NSUInteger start2 = [str rangeOfString:@"1"].location;
+    
+    if (start2<start) {
+        NSLog(@"start2 start %ld,%ld",start2,start);
+    }
+    
     NSString *path = [[NSBundle mainBundle] pathForResource:@"weibo" ofType:@"json"];
     NSData *data = [NSData dataWithContentsOfFile:path];
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
