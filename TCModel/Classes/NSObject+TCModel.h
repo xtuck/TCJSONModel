@@ -96,7 +96,7 @@ lastPathComponent], __LINE__, [NSString stringWithFormat:(s), ##__VA_ARGS__] )
 @end
 
 
-//MARK: - 在子类中的.m实现文件中加入TCModelSynthCoder宏，来实现归档解档
+//MARK: - 在model类中的.m实现文件中加入TCModelSynthCoder宏，来实现归档解档
 #define TCModelSynthCoder \
 - (void)encodeWithCoder:(NSCoder *)aCoder { [self tc_encodeCoder:aCoder]; } \
 - (id)initWithCoder:(NSCoder *)aDecoder { return [self tc_coder:aDecoder]; } \
