@@ -10,12 +10,12 @@
 #endif
 #endif
 
-#import "NSObject+TCModel.h"
+#import "NSObject+TCJSONModel.h"
 #import "TCJSONKeyMapper.h"
+#import "TCJSONModel.h"
+#import "TCJSONModelClassProperty.h"
+#import "TCJSONModelError.h"
 #import "TCJSONValueTransformer.h"
-#import "TCModel.h"
-#import "TCModelClassProperty.h"
-#import "TCModelError.h"
 
 FOUNDATION_EXPORT double TCJSONModelVersionNumber;
 FOUNDATION_EXPORT const unsigned char TCJSONModelVersionString[];

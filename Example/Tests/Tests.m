@@ -1,13 +1,13 @@
 //
-//  TCModelTests.m
-//  TCModelTests
+//  TCJSONModelTests.m
+//  TCJSONModelTests
 //
-//  Created by xtuck on 06/07/2020.
+//  Created by xtuck on 08/05/2020.
 //  Copyright (c) 2020 xtuck. All rights reserved.
 //
 
 @import XCTest;
-#import "NSObject+TCModel.h"
+#import "NSObject+TCJSONModel.h"
 #import "MJStudent.h"
 #import "MJBag.h"
 #import "JSWeiboModel.h"
@@ -108,6 +108,7 @@
 {
     XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
 }
+
 
 @end
 

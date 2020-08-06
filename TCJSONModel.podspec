@@ -1,5 +1,5 @@
 #
-# Be sure to run `pod lib lint TCModel.podspec' to ensure this is a
+# Be sure to run `pod lib lint TCJSONModel.podspec' to ensure this is a
 # valid spec before submitting.
 #
 # Any lines starting with a # are optional, but their use is encouraged
@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'TCJSONModel'
-  s.version          = '0.1.1'
-  s.summary          = '将JSONModel的继承方式改为了TCModel的分类方式，并做了解析效率优化'
+  s.version          = '0.1.2'
+  s.summary          = '将JSONModel的继承方式改为了TCJSONModel的分类方式，并做了解析效率优化'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -21,19 +21,19 @@ Pod::Spec.new do |s|
 TODO: Add long description of the pod here.
                        DESC
 
-  s.homepage         = 'https://github.com/xtuck/TCModel'
+  s.homepage         = 'https://github.com/xtuck/TCJSONModel'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'xtuck' => '104166631@qq.com' }
-  s.source           = { :git => 'https://github.com/xtuck/TCModel.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/xtuck/TCJSONModel.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '8.0'
 
-  s.source_files = 'TCModel/Classes/**/*'
+  s.source_files = 'TCJSONModel/Classes/**/*'
   
   # s.resource_bundles = {
-  #   'TCModel' => ['TCModel/Assets/*.png']
+  #   'TCJSONModel' => ['TCJSONModel/Assets/*.png']
   # }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'

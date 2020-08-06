@@ -2,10 +2,10 @@ use_frameworks!
 
 platform :ios, '8.0'
 
-target 'TCModel_Example' do
+target 'TCJSONModel_Example' do
   pod 'TCJSONModel', :path => '../'
 
-  target 'TCModel_Tests' do
+  target 'TCJSONModel_Tests' do
     inherit! :search_paths
 
     
