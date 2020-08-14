@@ -22,6 +22,9 @@
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
+		96ACE1F924E6230400349855 /* TCClassModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 96ACE1F824E6230400349855 /* TCClassModel.m */; };
+		96ACE1FC24E6236E00349855 /* TCGradeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 96ACE1FB24E6236E00349855 /* TCGradeModel.m */; };
+		96ACE1FF24E6239B00349855 /* TCStudentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 96ACE1FE24E6239B00349855 /* TCStudentModel.m */; };
 		96FABA4A24DC0B4A006E4598 /* JSWeiboModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 96FABA4324DC0B4A006E4598 /* JSWeiboModel.m */; };
 		96FABA4B24DC0B4A006E4598 /* JSWeiboModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 96FABA4324DC0B4A006E4598 /* JSWeiboModel.m */; };
 		96FABA4C24DC0B4A006E4598 /* MJStudent.m in Sources */ = {isa = PBXBuildFile; fileRef = 96FABA4424DC0B4A006E4598 /* MJStudent.m */; };
@@ -72,6 +75,12 @@
 		7E1EA762B94433D9E06C5A88 /* Pods_TCJSONModel_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TCJSONModel_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8849BC793BA9D4B6FC1DC6DB /* TCJSONModel.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = TCJSONModel.podspec; path = ../TCJSONModel.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		96ACE1F724E6230400349855 /* TCClassModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TCClassModel.h; sourceTree = "<group>"; };
+		96ACE1F824E6230400349855 /* TCClassModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TCClassModel.m; sourceTree = "<group>"; };
+		96ACE1FA24E6236E00349855 /* TCGradeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TCGradeModel.h; sourceTree = "<group>"; };
+		96ACE1FB24E6236E00349855 /* TCGradeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TCGradeModel.m; sourceTree = "<group>"; };
+		96ACE1FD24E6239B00349855 /* TCStudentModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TCStudentModel.h; sourceTree = "<group>"; };
+		96ACE1FE24E6239B00349855 /* TCStudentModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TCStudentModel.m; sourceTree = "<group>"; };
 		96FABA4324DC0B4A006E4598 /* JSWeiboModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSWeiboModel.m; sourceTree = "<group>"; };
 		96FABA4424DC0B4A006E4598 /* MJStudent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJStudent.m; sourceTree = "<group>"; };
 		96FABA4524DC0B4A006E4598 /* MJBag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJBag.m; sourceTree = "<group>"; };
@@ -156,6 +165,7 @@
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
 				6003F5A5195388D20070C39A /* TCViewController.h */,
 				6003F5A6195388D20070C39A /* TCViewController.m */,
+				96ACE1F624E622D500349855 /* Models */,
 				71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
@@ -214,6 +224,19 @@
 				CCC7FA77341D3AC9E6B85380 /* Pods-TCJSONModel_Tests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		96ACE1F624E622D500349855 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				96ACE1FA24E6236E00349855 /* TCGradeModel.h */,
+				96ACE1FB24E6236E00349855 /* TCGradeModel.m */,
+				96ACE1F724E6230400349855 /* TCClassModel.h */,
+				96ACE1F824E6230400349855 /* TCClassModel.m */,
+				96ACE1FD24E6239B00349855 /* TCStudentModel.h */,
+				96ACE1FE24E6239B00349855 /* TCStudentModel.m */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 		96FABA4224DC0B4A006E4598 /* TestsModels */ = {
@@ -404,11 +427,14 @@
 			files = (
 				96FABA5424DC0B86006E4598 /* DateFormatter.m in Sources */,
 				6003F59E195388D20070C39A /* TCAppDelegate.m in Sources */,
+				96ACE1FF24E6239B00349855 /* TCStudentModel.m in Sources */,
 				96FABA4A24DC0B4A006E4598 /* JSWeiboModel.m in Sources */,
 				6003F5A7195388D20070C39A /* TCViewController.m in Sources */,
 				96FABA4E24DC0B4A006E4598 /* MJBag.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 				96FABA4C24DC0B4A006E4598 /* MJStudent.m in Sources */,
+				96ACE1F924E6230400349855 /* TCClassModel.m in Sources */,
+				96ACE1FC24E6236E00349855 /* TCGradeModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,12 +7,41 @@
 //
 
 #import "TCAppDelegate.h"
+#import "TCClassModel.h"
+#import <objc/runtime.h>
 
 @implementation TCAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    
+    
+        unsigned int outCount = 0;
+        objc_property_t *properties = class_copyPropertyList(TCClassModel.class, &outCount);
+        for(int i = 0; i < outCount; i++){
+            const char * att = property_getAttributes(properties[i]);
+            NSLog(@"attribute = %s", att);
+
+    //        unsigned int attrCount;
+    //        objc_property_attribute_t *attrs = property_copyAttributeList(properties[i], &attrCount);
+    //        for (unsigned int j = 0; j < attrCount; j++) {
+    //            NSLog(@"name = %s  value = %s", attrs[j].name,attrs[j].value);
+    //        }
+
+    //        unsigned int count = 0;
+    //        objc_property_attribute_t *attributes = property_copyAttributeList(properties[i], &count);
+    //        for(int j = 0; j < count; j++){
+    //            NSLog(@"attribute.name = %s, attribute.value = %s", attributes[j].name, attributes[j].value);
+    //        }
+    //        free(attributes);
+        }
+        free(properties);
+
+    
+    
+    
+    
     return YES;
 }
 
