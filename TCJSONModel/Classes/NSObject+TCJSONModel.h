@@ -33,11 +33,12 @@ lastPathComponent], __LINE__, [NSString stringWithFormat:(s), ##__VA_ARGS__] )
 + (instancetype)tc_modelFromKeyValues:(id)keyValues;
 + (instancetype)tc_modelFromKeyValues:(id)keyValues error:(NSError **)err;
 
-
+///model转object
 - (NSDictionary *)tc_toDictionary;
 - (NSString *)tc_toJSONString;
 - (NSData *)tc_toJSONData;
 
+///model转object
 - (NSDictionary *)tc_toDictionaryWithKeys:(NSArray <NSString *> *)propertyNames;
 - (NSString *)tc_toJSONStringWithKeys:(NSArray <NSString *> *)propertyNames;
 - (NSData *)tc_toJSONDataWithKeys:(NSArray <NSString *> *)propertyNames;
@@ -85,6 +86,10 @@ lastPathComponent], __LINE__, [NSString stringWithFormat:(s), ##__VA_ARGS__] )
 - (instancetype)tc_coder:(NSCoder *)decoder;
 - (void)tc_encodeCoder:(NSCoder *)encoder;
 
+///字符串或者Data转成字典或字典数组
+- (id)tc_strToJSONObj;
+///字典或者字典数组转成字符串
+- (NSString *)tc_JSONOObjToStr;
 
 #pragma mark --提高解析效率
 

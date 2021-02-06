@@ -210,7 +210,7 @@ static TCJSONValueTransformer* tcValueTransformer = nil;
 
 
             // 1) check if property is itself a custom Class
-            if ([self __isCustomClass:property.type]) {
+            if ([NSObject tc_isCustomClass:property.type]) {
 
                 //initialize the property's model, store it
                 id value = [self valueForKey:property.name];
@@ -350,7 +350,7 @@ static TCJSONValueTransformer* tcValueTransformer = nil;
 ///如果需要使用系统类作为属性，但是不进行数据解析，可以加上<TCIgnore>进行修饰。
 ///判断class是否是自定义的类，用来过滤系统的类，提高解析效率
 /// @param class 对应的是property的类型或者修饰(array和dictionary)的protocol对应的类型
--(BOOL)__isCustomClass:(Class)class {
++(BOOL)tc_isCustomClass:(Class)class {
     if ([tcAllowedJSONTypes containsObject:class]) {
         return NO;
     }
@@ -599,7 +599,7 @@ static TCJSONValueTransformer* tcValueTransformer = nil;
     }
 
     //if the protocol is actually a custom class
-    if ([self __isCustomClass:protocolClass]) {
+    if ([NSObject tc_isCustomClass:protocolClass]) {
 
         //check if it's a list of models
         if ([property.type isSubclassOfClass:[NSArray class]]) {
@@ -672,7 +672,7 @@ static TCJSONValueTransformer* tcValueTransformer = nil;
     if (!protocolClass) return value;
 
     //if the protocol is actually a CustomModel class
-    if ([self __isCustomClass:protocolClass]) {
+    if ([NSObject tc_isCustomClass:protocolClass]) {
 
         //check if should export list of dictionaries
         if (property.type == [NSArray class] || property.type == [NSMutableArray class]) {
@@ -829,7 +829,7 @@ static TCJSONValueTransformer* tcValueTransformer = nil;
         }
 
         //check if the property is another model
-        if ([self __isCustomClass:p.type]) {
+        if ([NSObject tc_isCustomClass:p.type]) {
 
             //recurse models
             value = [(NSObject*)value tc_toDictionary];
@@ -1159,6 +1159,26 @@ static TCJSONValueTransformer* tcValueTransformer = nil;
 
 -(void)tc_encodeCoder:(NSCoder *)encoder {
     [encoder encodeObject:self.tc_toJSONString forKey:@"json"];
+}
+
+
+- (id)tc_strToJSONObj {
+    if ([self isKindOfClass:[NSString class]]) {
+        return [NSJSONSerialization JSONObjectWithData:[((NSString *)self) dataUsingEncoding:NSUTF8StringEncoding] options:kNilOptions error:nil];
+    } else if ([self isKindOfClass:[NSData class]]) {
+        return [NSJSONSerialization JSONObjectWithData:(NSData *)self options:kNilOptions error:nil];
+    }
+    return nil;
+}
+
+- (NSString *)tc_JSONOObjToStr {
+    if ([NSJSONSerialization isValidJSONObject:self]) {
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:self options:0 error:nil];
+        if (jsonData) {
+            return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];;
+        }
+    }
+    return nil;
 }
 
 @end

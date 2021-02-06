@@ -244,7 +244,15 @@ extern BOOL isTCNull(id value)
 }
 
 - (NSDictionary *)NSDictionaryFromNSString:(NSString *)strValue {
-    return nil;
+    return [NSJSONSerialization JSONObjectWithData:[strValue dataUsingEncoding:NSUTF8StringEncoding] options:kNilOptions error:nil];
+}
+
+- (NSArray *)NSArrayFromNSString:(NSString *)strValue {
+    NSArray *obj = [NSJSONSerialization JSONObjectWithData:[strValue dataUsingEncoding:NSUTF8StringEncoding] options:kNilOptions error:nil];
+    if (obj && ![obj isKindOfClass:NSArray.class]) {
+        return @[obj];
+    }
+    return obj;
 }
 
 @end
