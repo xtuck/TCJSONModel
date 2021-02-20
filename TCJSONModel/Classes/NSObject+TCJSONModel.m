@@ -1171,7 +1171,7 @@ static TCJSONValueTransformer* tcValueTransformer = nil;
     return nil;
 }
 
-- (NSString *)tc_JSONOObjToStr {
+- (NSString *)tc_JSONObjToStr {
     if ([NSJSONSerialization isValidJSONObject:self]) {
         NSData *jsonData = [NSJSONSerialization dataWithJSONObject:self options:0 error:nil];
         if (jsonData) {

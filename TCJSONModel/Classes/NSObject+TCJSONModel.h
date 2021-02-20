@@ -89,7 +89,7 @@ lastPathComponent], __LINE__, [NSString stringWithFormat:(s), ##__VA_ARGS__] )
 ///字符串或者Data转成字典或字典数组
 - (id)tc_strToJSONObj;
 ///字典或者字典数组转成字符串
-- (NSString *)tc_JSONOObjToStr;
+- (NSString *)tc_JSONObjToStr;
 
 #pragma mark --提高解析效率
 
