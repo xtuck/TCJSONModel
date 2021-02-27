@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'TCJSONModel'
-  s.version          = '0.1.2'
+  s.version          = '0.1.3'
   s.summary          = '将JSONModel的继承方式改为了TCJSONModel的分类方式，并做了解析效率优化'
 
 # This description is used to generate tags and improve search results.
